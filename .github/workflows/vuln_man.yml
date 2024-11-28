@@ -76,13 +76,13 @@ jobs:
   #         tags: ${{ matrix.project }}:latest
 
       - name: Generate docker SBOMs
-        run: >
+        run: |
           cdxgen
           --type docker
           --format json
-          --spec-version="1.5"
+          --spec-version="${{matrix.cdx_spec_version}}"
           --project-name="${{ matrix.project }}"
-          --project-version="build-${{ github.run_number }}"
+          --project-version="${{ github.run_number }}"
           -o "${{ matrix.project }}-docker_bom.json" ${{ matrix.project }}:latest
           
 
